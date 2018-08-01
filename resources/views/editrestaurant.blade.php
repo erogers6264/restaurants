@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block heading %}Edit {{ restaurant.name }}{% endblock %}
+{% block content %}
+<div class="box">
+	<form action="{{url_for('editRestaurant', restaurant_id=restaurant.restaurant_id)}}" method="POST">
+		{{ form.hidden_tag() }}
+		{{ form.name(size=20, placeholder=form.name.label.text) }}
+		{{ form.description(size=25, placeholder=form.description.label.text) }}
+        {{ form.picture(size=25, placeholder=form.picture.label.text) }}
+
+		{% if form.name.errors %}
+        <ul class="errors">
+        {% for error in form.name.errors %}
+        	<li>{{ error }}</li>{% endfor %}
+        </ul>
+    	{% endif %}
+		<input type="submit" class="button-primary" value="Submit edit">
+		<a href="{{ url_for('allRestaurants') }}">Cancel</a>
+	</form>
+</div>
+{% endblock %}
